@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+nav {
+    background: #111827;
+    color: white;
+
+    padding: 18px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h2 {
+    font-size: 24px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+
+    margin-left: 20px;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+main {
+    width: 86%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+}
+
+
+/* ================================
+   PRODUCTS
+================================ */
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+
+/* ================================
+   BUTTON
+================================ */
+
+.button {
+    display: inline-block;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #1d4ed8;
+}
+
+
+/* ================================
+   DELETE
+================================ */
+
+.delete-button {
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #b91c1c;
+}
+
+
+/* ================================
+   ACTIONS
+================================ */
+
+.actions {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-container {
+    max-width: 600px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+}
+
+.form-container h1,
+.form-container h2 {
+    margin-bottom: 25px;
+}
+
+.form-container form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+}
+
+.form-container textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* ================================
+   CANCEL
+================================ */
+
+.cancel-button {
+    background: #6b7280;
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+/* ================================
+   HIDDEN
+================================ */
+
+.hidden {
+    display: none;
+}
+
+
+/* ================================
+   SINGLE PRODUCT
+================================ */
+
+.single-product {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 40px;
+}
+
+.single-product img {
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+.single-product h1 {
+    margin-bottom: 15px;
+}
+
+.single-product h2 {
+    margin-bottom: 20px;
+}
+
+.single-product p {
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+
+/* ================================
+   ERROR
+================================ */
+
+.error {
+    color: #dc2626;
+
+    font-size: 18px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+    .products {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    nav {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .single-product {
+        grid-template-columns: 1fr;
+
+        padding: 20px;
+    }
+
+}
