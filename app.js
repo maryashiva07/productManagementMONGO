@@ -1,7 +1,3 @@
-const dns = require("dns");
-
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
-
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -10,6 +6,8 @@ require("dotenv").config();
 
 const shopRoutes = require("./routes/shopRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -23,13 +21,29 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// =========================
+// API ROUTES
+// =========================
+
 app.use("/api", shopRoutes);
 
 app.use("/api/admin", adminRoutes);
 
+app.use("/api/cart", cartRoutes);
+
+app.use("/api/orders", orderRoutes);
+
+// =========================
+// HOME PAGE
+// =========================
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+// =========================
+// 404 ROUTE
+// =========================
 
 app.use((req, res) => {
   res.status(404).json({
@@ -38,7 +52,9 @@ app.use((req, res) => {
   });
 });
 
+// =========================
 // MONGODB
+// =========================
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -54,3 +70,5 @@ mongoose
   .catch((error) => {
     console.log("MongoDB connection failed:", error);
   });
+
+

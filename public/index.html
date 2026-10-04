@@ -1,61 +1,37 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Shop</title>
 
-    <title>My Shop</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-    <nav>
+    <nav class="navbar">
+        <h2>Product Shop</h2>
 
-        <h2>My Shop</h2>
-
-        <div>
-
-            <a href="/">
-                Shop
+        <div class="nav-links">
+            <a href="/">Shop</a>
+            <a href="/cart.html">
+                Cart
+                <span id="cartCount" class="cart-count">0</span>
             </a>
-
-            <a href="/admin.html">
-                Admin
-            </a>
-
+            <a href="/orders.html">My Orders</a>
+            <a href="/admin.html">Admin</a>
         </div>
-
     </nav>
 
 
-    <main>
+    <main class="container">
 
-        <div class="page-header">
+        <h1>All Products</h1>
 
-            <h1>
-                All Products
-            </h1>
-
-        </div>
-
-
-        <div
-            id="productsContainer"
-            class="products"
-        >
+        <div id="productsContainer" class="products-grid">
+            <p>Loading products...</p>
         </div>
 
     </main>
@@ -64,5 +40,4 @@
     <script src="/js/shop.js"></script>
 
 </body>
-
 </html>

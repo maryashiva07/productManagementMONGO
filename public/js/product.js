@@ -1,34 +1,33 @@
 const API_URL = "/api";
 
 
-// ========================================
-// GET PRODUCT ID FROM URL
-// ========================================
+// Get user ID
+let userId = localStorage.getItem("userId");
 
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
+if (!userId) {
 
+    userId = crypto.randomUUID();
 
-const productId =
-    params.get("id");
+    localStorage.setItem("userId", userId);
+
+}
 
 
-// ========================================
-// FETCH SINGLE PRODUCT
-// ========================================
+// Get product ID from URL
+const params = new URLSearchParams(
+    window.location.search
+);
 
-const fetchSingleProduct = async () => {
+const productId = params.get("id");
+
+
+// Fetch product
+const fetchProduct = async () => {
 
     try {
 
         if (!productId) {
-
-            throw new Error(
-                "Product ID is missing"
-            );
-
+            throw new Error("Product ID missing");
         }
 
 
@@ -37,8 +36,7 @@ const fetchSingleProduct = async () => {
         );
 
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
 
         if (!data.success) {
@@ -50,29 +48,21 @@ const fetchSingleProduct = async () => {
 
     } catch (error) {
 
-        console.log(error);
+        console.error(error);
 
-        document.getElementById(
-            "productContainer"
-        ).innerHTML = `
-            <p class="error">
-                Product not found
-            </p>
-        `;
+        document.getElementById("productContainer").innerHTML =
+            `<p>Product not found.</p>`;
+
     }
+
 };
 
 
-// ========================================
-// DISPLAY PRODUCT
-// ========================================
-
+// Display product
 const displayProduct = (product) => {
 
     const container =
-        document.getElementById(
-            "productContainer"
-        );
+        document.getElementById("productContainer");
 
 
     container.innerHTML = `
@@ -80,37 +70,82 @@ const displayProduct = (product) => {
         <div class="single-product">
 
             <img
-                src="${product.imageUrl}"
+                src="${product.imageUrl || "https://via.placeholder.com/400"}"
                 alt="${product.title}"
             >
 
-            <div>
+            <div class="single-product-info">
 
-                <h1>
-                    ${product.title}
-                </h1>
+                <h1>${product.title}</h1>
 
-                <h2>
+                <h2 class="price">
                     ₹${product.price}
                 </h2>
 
                 <p>
-                    ${product.description}
+                    ${product.description || ""}
                 </p>
 
-                <a
-                    href="/"
-                    class="button"
+
+                <button
+                    class="btn primary-btn"
+                    onclick="addToCart('${product._id}')"
                 >
-                    Back to Shop
-                </a>
+                    Add to Cart
+                </button>
 
             </div>
 
         </div>
 
     `;
+
 };
 
 
-fetchSingleProduct();
+// Add product to cart
+const addToCart = async (productId) => {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/cart`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify({
+                    userId,
+                    productId,
+                    quantity: 1,
+                }),
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!data.success) {
+            throw new Error(data.message);
+        }
+
+
+        alert("Product added to cart");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
+
+
+fetchProduct();
